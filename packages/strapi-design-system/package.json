@@ -50,7 +50,6 @@
     "styled-components": "^5.2.1"
   },
   "scripts": {
-    "develop": "vite build --watch",
     "build": "yarn build:prod",
     "build:prod": "vite build",
     "clean": "rimraf dist node_modules",

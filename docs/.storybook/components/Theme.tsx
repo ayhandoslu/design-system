@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useDarkMode } from 'storybook-dark-mode';
 import { parse } from 'qs';
 import { DesignSystemProvider, Box, lightTheme, darkTheme } from '@strapi/design-system';
 
 const themeQueryURL = parse(document.location.search).theme;
 
-const Theme = ({ children }) => {
+const Theme = ({ children }: { children: ReactNode }) => {
   const isDarkAddon = useDarkMode();
   const [isDark, setIsDark] = useState(themeQueryURL || isDarkAddon);
 
@@ -17,7 +17,7 @@ const Theme = ({ children }) => {
 
   return (
     <DesignSystemProvider locale="en" theme={isDark ? darkTheme : lightTheme}>
-      <Box padding={2} background="neutral0">
+      <Box flex="1 0 100%" padding={2} background="neutral0">
         {children}
       </Box>
     </DesignSystemProvider>
