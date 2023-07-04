@@ -26,7 +26,7 @@ jobs:
       - run: yarn install
 
       - name: Build
-        run: yarn build --ignore=@strapi/design-system-docs
+        run: yarn build --exclude=@strapi/design-system-docs
 
       - name: Run TSC
         run: yarn test:ts
@@ -69,7 +69,7 @@ jobs:
       - run: yarn install
 
       - name: Build
-        run: yarn build --ignore=@strapi/design-system-docs
+        run: yarn build --exclude=@strapi/design-system-docs
 
       - name: Unit / Integration tests
         run: yarn test
