@@ -3,10 +3,12 @@ import { resolve } from 'path';
 import typescript from '@rollup/plugin-typescript';
 import react from '@vitejs/plugin-react';
 import glob from 'tiny-glob';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
+import dts from 'vite-plugin-dts';
 
-export default defineConfig(async () => {
+export default defineConfig(async ({ mode }) => {
   const paths = await glob('./src/**/!(*.spec|*.e2e|*.test).{js,svg,ts,tsx}');
+  const env = loadEnv(mode, process.cwd(), '');
 
   return {
     esbuild: {
@@ -15,7 +17,7 @@ export default defineConfig(async () => {
       exclude: [],
     },
     build: {
-      emptyOutDir: false,
+      emptyOutDir: env.DTS === 'true',
       target: 'esnext',
       lib: {
         entry: {},
@@ -37,6 +39,6 @@ export default defineConfig(async () => {
         plugins: [typescript()],
       },
     },
-    plugins: [react()],
+    plugins: env.DTS !== 'true' ? [react()] : [dts({ entryRoot: 'src' }), react()],
   };
 });
