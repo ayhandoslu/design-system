@@ -26,6 +26,6 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
-    plugins: env.DTS !== "true" ? [react()] : [dts(), react()],
+    plugins: env.DTS !== 'true' ? [react()] : [dts(), react()],
   };
 });
